@@ -134,149 +134,24 @@ body {
     }
 }
 
-/* Laser Cat Styles */
-.laser-cat {
+/* Canvas Backgrounds */
+#particleCanvas, #waveCanvas {
     position: absolute;
-    z-index: 5;
-    animation: float 4s ease-in-out infinite;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
-.cat-body {
-    position: relative;
+#waveCanvas {
+    z-index: 1;
+    opacity: 0.6;
 }
 
-.cat-head {
-    width: 60px;
-    height: 50px;
-    background: #00ff41;
-    border-radius: 50% 50% 45% 45%;
-    position: relative;
-    box-shadow: 
-        0 0 15px #00ff41,
-        inset 0 0 10px rgba(0, 0, 0, 0.3);
-    filter: contrast(1.2);
-}
-
-.cat-ear {
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: -8px;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 15px solid #00ff41;
-    filter: drop-shadow(0 0 5px #00ff41);
-}
-
-.cat-ear.left {
-    left: 8px;
-    transform: rotate(-15deg);
-}
-
-.cat-ear.right {
-    right: 8px;
-    transform: rotate(15deg);
-}
-
-.cat-eye {
-    width: 8px;
-    height: 8px;
-    background: #ff0000;
-    border-radius: 50%;
-    position: absolute;
-    top: 15px;
-    box-shadow: 
-        0 0 10px #ff0000,
-        0 0 20px #ff0000,
-        inset 0 0 5px #fff;
-    animation: blink 3s infinite;
-}
-
-.cat-eye.left {
-    left: 15px;
-}
-
-.cat-eye.right {
-    right: 15px;
-}
-
-.laser {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 2px;
-    height: 200px;
-    background: linear-gradient(
-        180deg,
-        #ff0000 0%,
-        #ff4444 50%,
-        transparent 100%
-    );
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    box-shadow: 
-        0 0 5px #ff0000,
-        0 0 10px #ff0000;
-    animation: laser-pulse 2s infinite;
-}
-
-.cat-nose {
-    width: 4px;
-    height: 3px;
-    background: #000;
-    position: absolute;
-    top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
-}
-
-.cat-mouth {
-    width: 12px;
-    height: 6px;
-    border: 1px solid #000;
-    border-top: none;
-    border-radius: 0 0 50% 50%;
-    position: absolute;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.cat-tail {
-    width: 4px;
-    height: 25px;
-    background: #00ff41;
-    position: absolute;
-    top: 40px;
-    right: -5px;
-    border-radius: 2px;
-    transform-origin: top;
-    animation: tail-wag 1.5s ease-in-out infinite alternate;
-    box-shadow: 0 0 5px #00ff41;
-}
-
-@keyframes float {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(20px, -15px) rotate(2deg); }
-    50% { transform: translate(-10px, -25px) rotate(-1deg); }
-    75% { transform: translate(-20px, -10px) rotate(1deg); }
-}
-
-@keyframes blink {
-    0%, 90%, 100% { opacity: 1; }
-    95% { opacity: 0.3; }
-}
-
-@keyframes laser-pulse {
-    0%, 70% { opacity: 0; }
-    75%, 85% { opacity: 0.8; }
-    90%, 100% { opacity: 0; }
-}
-
-@keyframes tail-wag {
-    0% { transform: rotate(-10deg); }
-    100% { transform: rotate(10deg); }
+#particleCanvas {
+    z-index: 2;
+    opacity: 0.8;
 }
 
 @media (max-width: 480px) {
@@ -284,7 +159,7 @@ body {
         font-size: 1.8rem;
     }
     
-    .laser-cat {
-        transform: scale(0.8);
+    #particleCanvas, #waveCanvas {
+        opacity: 0.4;
     }
 }
