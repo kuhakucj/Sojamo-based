@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    overflow: hidden;
+    cursor: none;
+    font-family: 'Orbitron', monospace;
+    height: 100vh;
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hello-world {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #00ff41;
+    text-shadow: 
+        0 0 10px #00ff41,
+        0 0 20px #00ff41,
+        0 0 40px #00ff41;
+    position: absolute;
+    transition: all 0.1s ease-out;
+    user-select: none;
+    z-index: 10;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.dither-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.3;
+    background-image: 
+        radial-gradient(circle at 25% 25%, #fff 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, #fff 1px, transparent 1px);
+    background-size: 4px 4px;
+    background-position: 0 0, 2px 2px;
+    animation: dither 0.2s infinite alternate;
+}
+
+.dither-layer:nth-child(2) {
+    opacity: 0.2;
+    background-image: 
+        radial-gradient(circle at 50% 50%, #00ff41 0.5px, transparent 0.5px);
+    background-size: 6px 6px;
+    animation: dither 0.3s infinite alternate-reverse;
+}
+
+.dither-layer:nth-child(3) {
+    opacity: 0.1;
+    background-image: 
+        radial-gradient(circle at 33% 66%, #fff 0.8px, transparent 0.8px);
+    background-size: 8px 8px;
+    animation: dither 0.4s infinite;
+}
+
+@keyframes dither {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(1px, 1px); }
+}
+
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        transparent 0%,
+        rgba(0, 255, 65, 0.03) 50%,
+        transparent 51%,
+        rgba(0, 255, 65, 0.03) 100%
+    );
+    background-size: 100% 4px;
+    animation: scanlines 0.1s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 4px; }
+}
+
+.cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #00ff41;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease-out;
+    box-shadow: 
+        0 0 10px #00ff41,
+        inset 0 0 10px #00ff41;
+    z-index: 20;
+}
+
+.trail {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #00ff41;
+    border-radius: 50%;
+    opacity: 0.7;
+    transform: translate(-50%, -50%);
+    animation: fade 0.5s ease-out forwards;
+}
+
+@keyframes fade {
+    0% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+}
+
+@media (max-width: 768px) {
+    .hello-world {
+        font-size: 2.5rem;
+    }
+}
+
+/* Laser Cat Styles */
+.laser-cat {
+    position: absolute;
+    z-index: 5;
+    animation: float 4s ease-in-out infinite;
+}
+
+.cat-body {
+    position: relative;
+}
+
+.cat-head {
+    width: 60px;
+    height: 50px;
+    background: #00ff41;
+    border-radius: 50% 50% 45% 45%;
+    position: relative;
+    box-shadow: 
+        0 0 15px #00ff41,
+        inset 0 0 10px rgba(0, 0, 0, 0.3);
+    filter: contrast(1.2);
+}
+
+.cat-ear {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -8px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 15px solid #00ff41;
+    filter: drop-shadow(0 0 5px #00ff41);
+}
+
+.cat-ear.left {
+    left: 8px;
+    transform: rotate(-15deg);
+}
+
+.cat-ear.right {
+    right: 8px;
+    transform: rotate(15deg);
+}
+
+.cat-eye {
+    width: 8px;
+    height: 8px;
+    background: #ff0000;
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    box-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        inset 0 0 5px #fff;
+    animation: blink 3s infinite;
+}
+
+.cat-eye.left {
+    left: 15px;
+}
+
+.cat-eye.right {
+    right: 15px;
+}
+
+.laser {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 200px;
+    background: linear-gradient(
+        180deg,
+        #ff0000 0%,
+        #ff4444 50%,
+        transparent 100%
+    );
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    box-shadow: 
+        0 0 5px #ff0000,
+        0 0 10px #ff0000;
+    animation: laser-pulse 2s infinite;
+}
+
+.cat-nose {
+    width: 4px;
+    height: 3px;
+    background: #000;
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+}
+
+.cat-mouth {
+    width: 12px;
+    height: 6px;
+    border: 1px solid #000;
+    border-top: none;
+    border-radius: 0 0 50% 50%;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cat-tail {
+    width: 4px;
+    height: 25px;
+    background: #00ff41;
+    position: absolute;
+    top: 40px;
+    right: -5px;
+    border-radius: 2px;
+    transform-origin: top;
+    animation: tail-wag 1.5s ease-in-out infinite alternate;
+    box-shadow: 0 0 5px #00ff41;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(20px, -15px) rotate(2deg); }
+    50% { transform: translate(-10px, -25px) rotate(-1deg); }
+    75% { transform: translate(-20px, -10px) rotate(1deg); }
+}
+
+@keyframes blink {
+    0%, 90%, 100% { opacity: 1; }
+    95% { opacity: 0.3; }
+}
+
+@keyframes laser-pulse {
+    0%, 70% { opacity: 0; }
+    75%, 85% { opacity: 0.8; }
+    90%, 100% { opacity: 0; }
+}
+
+@keyframes tail-wag {
+    0% { transform: rotate(-10deg); }
+    100% { transform: rotate(10deg); }
+}
+
+@media (max-width: 480px) {
+    .hello-world {
+        font-size: 1.8rem;
+    }
+    
+    .laser-cat {
+        transform: scale(0.8);
+    }
+}
